@@ -9,10 +9,12 @@
 import UIKit
 //  All robot commands can be founded in GameViewController.h
 class SwiftRobotControlCenter: RobotControlCenter {
-    
+    /*
+     Используйте робота, для постройки X - фигуры как на скрине.
+     */
     //  Level name setup
     override func viewDidLoad() {
-        levelName = "L0C" //  Level name
+        levelName = "L55H" //  Level name
         
         super.viewDidLoad()
     }
@@ -21,7 +23,42 @@ class SwiftRobotControlCenter: RobotControlCenter {
         
         super.viewDidAppear(animated)
         
+        drawCross()
+    }
+    
+    func drawCross() {
+        diagonal()
+        goToNextStep()
+        turnRight()
+        diagonal()
+        put()
         
     }
     
+    func diagonal() {
+        while frontIsClear {
+            put()
+            if frontIsClear {
+                move()
+                turnRight()
+            }
+            if frontIsClear {
+                move()
+                turnLeft()
+            }
+        }
+    }
+    
+    func goToNextStep() {
+        turnRight()
+        while frontIsClear {
+            move()
+        }
+    }
+    
+    func turnLeft() {
+        turnRight()
+        turnRight()
+        turnRight()
+    }
 }
